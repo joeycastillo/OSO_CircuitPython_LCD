@@ -99,6 +99,7 @@ class LCDWingLite(BU9796Lite):
         pos = 1 if neg else 0
         d = False
         i = 1
+        self._set_buffer(0, self._get_buffer(0) & ~Indicator.COLON)
         while i < 6:
             b = 0
             try:
