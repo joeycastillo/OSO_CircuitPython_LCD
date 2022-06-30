@@ -84,6 +84,7 @@ class Indicator:
     WIFI = const(0b00000100)
     DATA = const(0b00000010)
     MOON = const(0b00000001)
+    ALL = const(0b11101111)
 
 class LCDWingLite(BU9796Lite):
     """
