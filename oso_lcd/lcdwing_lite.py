@@ -121,14 +121,22 @@ class LCDWingLite(BU9796Lite):
         if self.auto_write:
             self.show()
 
+    def _update_byte_0(self):
+        if self._auto_write:
+            self.show_partial(1)
+
     def set_indicator(self, indicator: byte):
         """Sets one of the indicators. Values are in lcdwing_lite.Indicators"""
         self._set_buffer(0, self._get_buffer(0) | indicator)
-        if self._auto_write:
-            self.show_partial(1)
+        self._update_byte_0()
 
     def clear_indicator(self, indicator: int):
         """Clears one of the indicators."""
         self._set_buffer(0, self._get_buffer(0) & ~indicator)
-        if self._auto_write:
-            self.show_partial(1)
+        self._update_byte_0()
+
+    def toggle_colon(self):
+        """Toggles the colon. Useful for ticking a clock."""
+        indicators = self._get_buffer(0)
+        self._set_buffer(0, indicators & ~0b00010000 if indicators & 0b00010000 else indicators | 0b00010000)
+        self._update_byte_0()
