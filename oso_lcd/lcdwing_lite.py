@@ -82,7 +82,7 @@ class Indicator:
     BATTERY = const(0b00100000)
     COLON = const(0b00010000)
     BELL = const(0b00001000)
-    SIGNAL = const(0b00000100)
+    WIFI = const(0b00000100)
     DATA = const(0b00000010)
     MOON = const(0b00000001)
 
