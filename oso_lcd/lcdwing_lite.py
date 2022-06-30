@@ -80,7 +80,6 @@ class Indicator:
     AM = const(0b10000000)
     PM = const(0b01000000)
     BATTERY = const(0b00100000)
-    COLON = const(0b00010000)
     BELL = const(0b00001000)
     WIFI = const(0b00000100)
     DATA = const(0b00000010)
@@ -99,7 +98,7 @@ class LCDWingLite(BU9796Lite):
         pos = 1 if neg else 0
         d = False
         i = 1
-        self._set_buffer(0, self._get_buffer(0) & ~Indicator.COLON)
+        self._set_buffer(0, self._get_buffer(0) & ~0b00010000)
         while i < 6:
             b = 0
             try:
@@ -110,7 +109,7 @@ class LCDWingLite(BU9796Lite):
                     continue
                 elif c == ':':
                     if i == 3:
-                        self._set_buffer(0, self._get_buffer(0) | Indicator.COLON)
+                        self._set_buffer(0, self._get_buffer(0) | 0b00010000)
                     continue
                 b = CHARS[ord(c) - 32]
             except:
