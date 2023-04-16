@@ -69,6 +69,10 @@ class BU9796Lite:
             else:
                 self.i2c_device.write(self._buffer[:1+length])
 
+    def blink(self, blinkmode) -> None:
+        """Set blink mode: 1 for slow, 2 for medium, 3 for fast. 0 disables blinking."""
+        self._write_cmd(0b01110000 | (blinkmode & 0b11))
+
     def fill(self, on: bool) -> None:
         """Turn all pixels on or off
         :param bool on: Desired state for all pixels
